@@ -71,7 +71,7 @@ def main():
     )
 
     # Get cell lines from rnaseq csv file
-    cell_lines = get_cell_lines(args.rnaseq_data, limit=2)
+    cell_lines = get_cell_lines(args.rnaseq_data, limit=3)
 
     personalize_patient_folder = os.path.join(args.results_folder, "personalize_patient")
     os.makedirs(personalize_patient_folder, exist_ok=True)
