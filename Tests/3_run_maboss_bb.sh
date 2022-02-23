@@ -9,6 +9,8 @@ results=$(pwd)/results/
 per_results=${results}/personalize_patient
 mut_results=${results}/mutant_results
 
+source aux.sh
+disable_pycompss
 
 # 1st patient
 
@@ -41,3 +43,5 @@ maboss_BB -d \
     -o ${mut_results}/SIDM00040/sensitivity.json \
     -c ${data}/personalization.yml \
     --mount_points ${PERMEDCOE_ASSETS}/MaBoSS/:${PERMEDCOE_ASSETS}/MaBoSS/
+
+enable_pycompss

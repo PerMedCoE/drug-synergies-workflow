@@ -12,6 +12,9 @@ per_results=${results}/personalize_patient
 # Data is too big for github, so I compressed it. Need to uncompress first
 tar -zxvf ${data}/data_celllines.tar.gz --directory ${data}
 
+source aux.sh
+disable_pycompss
+
 # 1st cell line
 cell_line=SIDM00003
 mkdir -p ${per_results}/${cell_line}/
@@ -61,3 +64,5 @@ personalize_patient_BB -d \
     -o ${per_results}/${cell_line}/ \
     -c ${data}/personalization.yml \
     --mount_points ${PERMEDCOE_ASSETS}/personalize_patient/:${PERMEDCOE_ASSETS}/personalize_patient/
+
+enable_pycompss

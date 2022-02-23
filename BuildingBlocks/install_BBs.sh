@@ -19,10 +19,6 @@ cd MaBoSS
 ./install.sh
 cd ..
 
-cd meta_analysis
-./install.sh
-cd ..
-
 cd print_drug_results
 ./install.sh
 cd ..

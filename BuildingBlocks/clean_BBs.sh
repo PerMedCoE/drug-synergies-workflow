@@ -19,10 +19,6 @@ cd MaBoSS
 ./clean.sh
 cd ..
 
-cd meta_analysis
-./clean.sh
-cd ..
-
 cd print_drug_results
 ./clean.sh
 cd ..

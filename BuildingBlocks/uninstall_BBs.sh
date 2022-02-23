@@ -19,10 +19,6 @@ cd MaBoSS
 ./uninstall.sh
 cd ..
 
-cd meta_analysis
-./uninstall.sh
-cd ..
-
 cd print_drug_results
 ./uninstall.sh
 cd ..
