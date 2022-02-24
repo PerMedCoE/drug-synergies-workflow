@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
-export PERMEDCOE_IMAGES=$(pwd)/../../BuildingBlocks/Resources/images/
-export PERMEDCOE_ASSETS=$(pwd)/../../BuildingBlocks/Resources/assets/
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-data=$(pwd)/../Resources/data/
-results=$(pwd)/results/
+export PERMEDCOE_IMAGES=${SCRIPT_DIR}/../../BuildingBlocks/Resources/images/
+if [ -z "${CONTAINER}" ] && [ "${CONTAINER}" == "True" ]
+then
+  export PERMEDCOE_ASSETS=${SCRIPT_DIR}/../../BuildingBlocks/Resources/assets/
+else
+  export PERMEDCOE_ASSETS=/root/assets/
+fi
+
+data=${SCRIPT_DIR}/../Resources/data/
+results=${SCRIPT_DIR}/results/
 
 mkdir -p ${results}/build_model/
 
-source aux.sh
+source ${SCRIPT_DIR}/aux.sh
 disable_pycompss
 
 build_model_from_species_BB -d \

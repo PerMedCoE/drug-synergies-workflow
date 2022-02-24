@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-export PERMEDCOE_IMAGES=$(pwd)/../../BuildingBlocks/Resources/images/
-export PERMEDCOE_ASSETS=$(pwd)/../../BuildingBlocks/Resources/assets/
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-data=$(pwd)/../Resources/data/
-results=$(pwd)/results/
+export PERMEDCOE_IMAGES=${SCRIPT_DIR}/../../BuildingBlocks/Resources/images/
+if [ -z "${CONTAINER}" ] && [ "${CONTAINER}" == "True" ]
+then
+  export PERMEDCOE_ASSETS=${SCRIPT_DIR}/../../BuildingBlocks/Resources/assets/
+else
+  export PERMEDCOE_ASSETS=/root/assets/
+fi
+
+data=${SCRIPT_DIR}/../Resources/data/
+results=${SCRIPT_DIR}/results/
 
 mod_results=${results}/build_model
 per_results=${results}/personalize_patient
@@ -12,7 +19,7 @@ per_results=${results}/personalize_patient
 # Data is too big for github, so I compressed it. Need to uncompress first
 tar -zxvf ${data}/data_celllines.tar.gz --directory ${data}
 
-source aux.sh
+source ${SCRIPT_DIR}/aux.sh
 disable_pycompss
 
 # 1st cell line
