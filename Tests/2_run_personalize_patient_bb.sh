@@ -3,12 +3,6 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 export PERMEDCOE_IMAGES=${SCRIPT_DIR}/../../BuildingBlocks/Resources/images/
-if [ -z "${CONTAINER}" ] && [ "${CONTAINER}" == "True" ]
-then
-  export PERMEDCOE_ASSETS=${SCRIPT_DIR}/../../BuildingBlocks/Resources/assets/
-else
-  export PERMEDCOE_ASSETS=/root/assets/
-fi
 
 data=${SCRIPT_DIR}/../Resources/data/
 results=${SCRIPT_DIR}/results/
@@ -21,6 +15,8 @@ tar -zxvf ${data}/data_celllines.tar.gz --directory ${data}
 
 source ${SCRIPT_DIR}/aux.sh
 disable_pycompss
+
+PERSONALIZE_PATIENT_ASSETS=$(python3 -c "import personalize_patient_BB; import os; print(os.path.dirname(personalize_patient_BB.__file__))")
 
 # 1st cell line
 cell_line=SIDM00003
@@ -35,7 +31,7 @@ personalize_patient_BB -d \
        ${mod_results}/model.cfg \
     -o ${per_results}/${cell_line}/ \
     -c ${data}/personalization.yml \
-    --mount_points ${PERMEDCOE_ASSETS}/personalize_patient/:${PERMEDCOE_ASSETS}/personalize_patient/
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
 
 # 2nd cell line
 
@@ -52,7 +48,7 @@ personalize_patient_BB -d \
        ${mod_results}/model.cfg \
     -o ${per_results}/${cell_line}/ \
     -c ${data}/personalization.yml \
-    --mount_points ${PERMEDCOE_ASSETS}/personalize_patient/:${PERMEDCOE_ASSETS}/personalize_patient/
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
 
 
 # 3rd cell line
@@ -70,6 +66,6 @@ personalize_patient_BB -d \
        ${mod_results}/model.cfg \
     -o ${per_results}/${cell_line}/ \
     -c ${data}/personalization.yml \
-    --mount_points ${PERMEDCOE_ASSETS}/personalize_patient/:${PERMEDCOE_ASSETS}/personalize_patient/
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
 
 enable_pycompss

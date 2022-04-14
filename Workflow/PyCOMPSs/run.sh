@@ -3,12 +3,6 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 export PERMEDCOE_IMAGES=$(realpath ${SCRIPT_DIR}/../../../BuildingBlocks/Resources/images/)/
-if [ -z "${CONTAINER}" ] && [ "${CONTAINER}" == "True" ]
-then
-  export PERMEDCOE_ASSETS=$(realpath ${SCRIPT_DIR}/../../../BuildingBlocks/Resources/assets/)/
-else
-  export PERMEDCOE_ASSETS=/root/assets/
-fi
 
 data=$(realpath ${SCRIPT_DIR}/../../Resources/data/)/
 results=${SCRIPT_DIR}/results/
@@ -18,7 +12,7 @@ if [ -d "$results" ]; then
 fi
 mkdir -p $results
 
-runcompss \
+runcompss -gd \
     --python_interpreter=python3 \
     ${SCRIPT_DIR}/src/uc2.py \
     ${data}/Sub_genes.csv \

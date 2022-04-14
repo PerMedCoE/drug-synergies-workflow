@@ -8,8 +8,8 @@ from permedcoe import set_debug
 # Import building block tasks
 from build_model_from_species_BB import build_model_from_species
 from personalize_patient_BB import personalize_patient_cellline
-from maboss_BB import MaBoSS_analysis
-from maboss_BB import MaBoSS_sensitivity_analysis
+from MaBoSS_BB import MaBoSS_analysis
+from MaBoSS_BB import MaBoSS_sensitivity_analysis
 from print_drug_results_BB import print_drug_results_parallelized
 # Import utils
 from utils import parse_input_parameters
@@ -65,13 +65,13 @@ def main():
     model_cfg_path = os.path.join(build_model_folder, "model.cfg")
 
     build_model_from_species(
-        input_file=args.list_genes,
         output_bnd_file=model_bnd_path,
-        output_cfg_file=model_cfg_path
+        output_cfg_file=model_cfg_path,
+        input_file=args.list_genes
     )
 
     # Get cell lines from rnaseq csv file
-    cell_lines = get_cell_lines(args.rnaseq_data, limit=3)
+    cell_lines = get_cell_lines(args.rnaseq_data, limit=2)
 
     personalize_patient_folder = os.path.join(args.results_folder, "personalize_patient")
     os.makedirs(personalize_patient_folder, exist_ok=True)
