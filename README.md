@@ -1,10 +1,8 @@
-# Drug Synergies Workflow
-
-Drug Synergies for Cancer Treatment
+# Drug Synergies Screening Workflow
 
 ## Table of Contents
 
-- [Drug Synergies Workflow](#drug-synergies-workflow)
+- [Drug Synergies Screening Workflow](#drug-synergies-screening-workflow)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Contents](#contents)
@@ -24,7 +22,18 @@ Drug Synergies for Cancer Treatment
 
 ## Description
 
-TO BE COMPLETED
+This pipeline simulates a drug screening on personalised cell line models. It automatically builds Boolean models of interest, then uses cell lines data (expression, mutations, copy number variations) to personalise them as MaBoSS models. Finally, this pipeline simulates multiple drug intervention on these MaBoSS models, and lists drug synergies of interest.
+
+The workflow uses the following building blocks, described in order of execution:
+
+1. Build model from species
+2. Personalise patient
+3. MaBoSS
+4. Print drug results
+
+For details on individual workflow steps, see the user documentation for each building block.
+
+[`GitHub repository`](https://github.com/PerMedCoE/drug-synergies-workflow>)
 
 ## Contents
 
@@ -41,8 +50,7 @@ Currently contains the implementation using PyCOMPSs.
 
 ### Resources
 
-The ``Resources`` folder contains the building blocks assets and images, and
-a small dataset.
+The ``Resources`` folder contains a small dataset for testing purposes.
 
 ### Tests
 
@@ -75,10 +83,10 @@ This section explains the requirements and usage for the Drug Synergies Workflow
 
    ```bash
    cd BuildingBlocks/Resources/images
-   sudo singularity build FromSpeciesToMaBoSSModel.sif FromSpeciesToMaBoSSModel.singularity
-   sudo singularity build MaBoSS.sif MaBoSS.singularity
-   sudo singularity build MaBoSS_sensitivity.sif MaBoSS_sensitivity.singularity
+   sudo singularity build PhysiCell-COVID19.sif PhysiCell-COVID19.singularity
    sudo singularity build printResults.sif printResults.singularity
+   sudo singularity build MaBoSS_sensitivity.sif MaBoSS_sensitivity.singularity
+   sudo singularity build FromSpeciesToMaBoSSModel.sif FromSpeciesToMaBoSSModel.singularity
    cd ../../..
    ```
 
@@ -105,8 +113,7 @@ This section explains the requirements and usage for the Drug Synergies Workflow
 
 6. Execute `./run.sh`
 
-The execution is prepared to use the singularity images that **MUST** be placed into `BuildingBlocks/Resources/images` folder, and the assets **MUST** be located into `BuildingBlocks/Resources/assets`. If they are located in any other folder, please update the `run.sh` script setting the `PERMEDCOE_IMAGES` and `PERMEDCOE_ASSETS` to
-the images and assets folders accordingly.
+The execution is prepared to use the singularity images that **MUST** be placed into `BuildingBlocks/Resources/images` folder. If they are located in any other folder, please update the `run.sh` script setting the `PERMEDCOE_IMAGES` to the images folder.
 
 > **TIP**: If you want to run the workflow with a different dataset, please update the `run.sh` script setting the `dataset` variable to the new dataset folder and their file names.
 
@@ -134,7 +141,7 @@ All Building Blocks are already installed in MN4, and the Drug Synergies Workflo
 
    > **TIP**: Include the loading into your `${HOME}/.bashrc` file to load it automatically on the session start.
 
-   This commands will load COMPSs and the permedcoe package which provides all necessary dependencies, as well as the path to the singularity container images (`PERMEDCOE_IMAGES` environment variable), assets (`PERMEDCOE_ASSETS` environment variable) and testing dataset (`DRUG_SYNERGIES_WORKFLOW_DATASET` environment variable).
+   This commands will load COMPSs and the permedcoe package which provides all necessary dependencies, as well as the path to the singularity container images (`PERMEDCOE_IMAGES` environment variable) and testing dataset (`DRUG_SYNERGIES_WORKFLOW_DATASET` environment variable).
 
 2. Get a copy of the pilot workflow into your desired folder
 
@@ -152,7 +159,7 @@ All Building Blocks are already installed in MN4, and the Drug Synergies Workflo
 
 4. Execute `./launch.sh`
 
-This command will launch a job into the job queuing system (SLURM) requesting 2 nodes (one node acting half master and half worker, and other full worker node) for 20 minutes, and is prepared to use the singularity images that are already deployed in MN4 (located into the `PERMEDCOE_IMAGES` environment variable). It uses the assets located into the `PERMEDCOE_ASSETS` environment variable and dataset located into `../../Resources/data` folder.
+This command will launch a job into the job queuing system (SLURM) requesting 2 nodes (one node acting half master and half worker, and other full worker node) for 20 minutes, and is prepared to use the singularity images that are already deployed in MN4 (located into the `PERMEDCOE_IMAGES` environment variable). It uses the dataset located into `../../Resources/data` folder.
 
 > :warning: **TIP**: If you want to run the workflow with a different dataset, please edit the `launch.sh` script and define the appropriate dataset path.
 
