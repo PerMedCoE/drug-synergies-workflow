@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-export COMPSS_PYTHON_VERSION=3
-module load COMPSs/Trunk # 2.10
+export COMPSS_PYTHON_VERSION=3.10.2
+module use /apps/modules/modulefiles/tools/COMPSs/.custom
+module load TrunkJCB
+#module load COMPSs/Trunk
 module load singularity/3.5.2
 module use /apps/modules/modulefiles/tools/COMPSs/libraries
 module load permedcoe  # generic permedcoe package
@@ -11,7 +13,6 @@ unset PYTHONHOME
 
 # Override the following for using different images, assets or data
 export PERMEDCOE_IMAGES=${PERMEDCOE_IMAGES}  # Currently using the "permedcoe" deployed
-export PERMEDCOE_ASSETS=${PERMEDCOE_ASSETS}  # Currently using the "permedcoe" deployed
 data=$(pwd)/../../Resources/data/
 results=$(pwd)/results/
 
@@ -24,10 +25,11 @@ fi
 mkdir -p $results
 
 enqueue_compss \
+    --qos=debug \
     --num_nodes=2 \
-    --exec_time=20 \
+    --exec_time=40 \
     --worker_working_dir=$(pwd) \
-    --log_level=off \
+    --log_level=debug \
     --graph \
     --tracing \
     --python_interpreter=python3 \
