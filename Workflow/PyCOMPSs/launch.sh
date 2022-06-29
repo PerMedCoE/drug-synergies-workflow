@@ -2,8 +2,7 @@
 
 export COMPSS_PYTHON_VERSION=3.10.2
 module use /apps/modules/modulefiles/tools/COMPSs/.custom
-module load TrunkJCB
-#module load COMPSs/Trunk
+module load COMPSs/3.0
 module load singularity/3.5.2
 module use /apps/modules/modulefiles/tools/COMPSs/libraries
 module load permedcoe  # generic permedcoe package
@@ -29,7 +28,7 @@ enqueue_compss \
     --num_nodes=2 \
     --exec_time=40 \
     --worker_working_dir=$(pwd) \
-    --log_level=debug \
+    --log_level=off \
     --graph \
     --tracing \
     --python_interpreter=python3 \
