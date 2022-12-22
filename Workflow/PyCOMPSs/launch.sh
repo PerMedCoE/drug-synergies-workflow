@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export COMPSS_PYTHON_VERSION=3.10.2
+export COMPSS_PYTHON_VERSION=3
 module use /apps/modules/modulefiles/tools/COMPSs/.custom
 module load COMPSs/3.0
 module load singularity/3.5.2

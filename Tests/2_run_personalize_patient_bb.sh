@@ -19,53 +19,51 @@ disable_pycompss
 PERSONALIZE_PATIENT_ASSETS=$(python3 -c "import personalize_patient_BB; import os; print(os.path.dirname(personalize_patient_BB.__file__))")
 
 # 1st cell line
+
 cell_line=SIDM00003
 mkdir -p ${per_results}/${cell_line}/
 
 personalize_patient_BB -d \
-    -i ${data}/rnaseq_fpkm_20191101.csv \
-       ${data}/mutations_20191101.csv.csv \
-       ${data}/cnv_gistic_20191101.csv \
-       ${cell_line} \
-       ${mod_results}/model.bnd \
-       ${mod_results}/model.cfg \
-    -o ${per_results}/${cell_line}/ \
-    -c ${data}/personalization.yml \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    uc2 \
+    --expression ${data}/rnaseq_fpkm_20191101.csv \
+    --cnv ${data}/mutations_20191101.csv \
+    --mutation ${data}/cnv_gistic_20191101.csv \
+    --cell_type ${cell_line} \
+    --model_bnd ${mod_results}/model.bnd \
+    --model_cfg ${mod_results}/model.cfg \
+    --model_output_dir ${per_results}/${cell_line}/
 
 # 2nd cell line
 
 cell_line=SIDM00023
-
 mkdir -p ${per_results}/${cell_line}/
 
 personalize_patient_BB -d \
-    -i ${data}/rnaseq_fpkm_20191101.csv \
-       ${data}/mutations_20191101.csv.csv \
-       ${data}/cnv_gistic_20191101.csv \
-       ${cell_line} \
-       ${mod_results}/model.bnd \
-       ${mod_results}/model.cfg \
-    -o ${per_results}/${cell_line}/ \
-    -c ${data}/personalization.yml \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
-
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    uc2 \
+    --expression ${data}/rnaseq_fpkm_20191101.csv \
+    --cnv ${data}/mutations_20191101.csv \
+    --mutation ${data}/cnv_gistic_20191101.csv \
+    --cell_type ${cell_line} \
+    --model_bnd ${mod_results}/model.bnd \
+    --model_cfg ${mod_results}/model.cfg \
+    --model_output_dir ${per_results}/${cell_line}/
 
 # 3rd cell line
 
 cell_line=SIDM00040
-
 mkdir -p ${per_results}/${cell_line}/
 
 personalize_patient_BB -d \
-    -i ${data}/rnaseq_fpkm_20191101.csv \
-       ${data}/mutations_20191101.csv.csv \
-       ${data}/cnv_gistic_20191101.csv \
-       ${cell_line} \
-       ${mod_results}/model.bnd \
-       ${mod_results}/model.cfg \
-    -o ${per_results}/${cell_line}/ \
-    -c ${data}/personalization.yml \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    uc2 \
+    --expression ${data}/rnaseq_fpkm_20191101.csv \
+    --cnv ${data}/mutations_20191101.csv \
+    --mutation ${data}/cnv_gistic_20191101.csv \
+    --cell_type ${cell_line} \
+    --model_bnd ${mod_results}/model.bnd \
+    --model_cfg ${mod_results}/model.cfg \
+    --model_output_dir ${per_results}/${cell_line}/
 
 enable_pycompss
