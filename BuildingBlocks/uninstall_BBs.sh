@@ -2,25 +2,9 @@
 
 echo "Uninstalling drug-synergies-workflow required Building Blocks... Please wait..."
 
-CURRENT_DIR=$(pwd)
-# SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+python3 -m pip uninstall -y build_model_from_species-BB
+python3 -m pip uninstall -y personalize_patient-BB
+python3 -m pip uninstall -y MaBoSS-BB
+python3 -m pip uninstall -y print_drug_results-BB
 
-cd ../../BuildingBlocks
-
-cd build_model_from_species
-./uninstall.sh
-cd ..
-
-cd personalize_patient
-./uninstall.sh
-cd ..
-
-cd MaBoSS
-./uninstall.sh
-cd ..
-
-cd print_drug_results
-./uninstall.sh
-cd ..
-
-cd ${CURRENT_DIR}
+echo "Uninstall finished"
