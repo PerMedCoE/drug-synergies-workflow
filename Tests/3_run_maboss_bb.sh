@@ -20,31 +20,32 @@ MABOSS_ASSETS=$(python3 -c "import MaBoSS_BB; import os; print(os.path.dirname(M
 mkdir -p ${mut_results}/SIDM00003
 
 MaBoSS_BB -d \
-    -i ${per_results}/SIDM00003/ \
-       ${data}/genes_druggable.csv \
-       ${data}/genes_target.csv \
-    -o ${mut_results}/SIDM00003/sensitivity.json \
-    -c ${data}/personalization.yml \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets
+    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    sensitivity \
+    --model_folder ${per_results}/SIDM00003/ \
+    --genes_druggable ${data}/genes_druggable.csv \
+    --genes_target ${data}/genes_target.csv \
+    --result_file ${mut_results}/SIDM00003/sensitivity.json
+
 
 mkdir -p ${mut_results}/SIDM00023
 
 MaBoSS_BB -d \
-    -i ${per_results}/SIDM00023/ \
-       ${data}/genes_druggable.csv \
-       ${data}/genes_target.csv \
-    -o ${mut_results}/SIDM00023/sensitivity.json \
-    -c ${data}/personalization.yml \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets
+    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    sensitivity \
+    --model_folder ${per_results}/SIDM00023/ \
+    --genes_druggable ${data}/genes_druggable.csv \
+    --genes_target ${data}/genes_target.csv \
+    --result_file ${mut_results}/SIDM00023/sensitivity.json
 
 mkdir -p ${mut_results}/SIDM00040
 
 MaBoSS_BB -d \
-    -i ${per_results}/SIDM00040/ \
-       ${data}/genes_druggable.csv \
-       ${data}/genes_target.csv \
-    -o ${mut_results}/SIDM00040/sensitivity.json \
-    -c ${data}/personalization.yml \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets
+    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    sensitivity \
+    --model_folder ${per_results}/SIDM00040/ \
+    --genes_druggable ${data}/genes_druggable.csv \
+    --genes_target ${data}/genes_target.csv \
+    --result_file ${mut_results}/SIDM00040/sensitivity.json
 
 enable_pycompss

@@ -73,49 +73,53 @@ This section explains the requirements and usage for the Drug Synergies Workflow
 
 #### Usage steps
 
-1. Clone the `BuildingBlocks` repository
+1. Clone this repository:
 
-   ```bash
-   git clone https://github.com/PerMedCoE/BuildingBlocks.git
-   ```
+  ```bash
+  git clone https://github.com/PerMedCoE/drug-synergies-workflow.git
+  ```
 
-2. Build the required Building Block images
+2. Install the Building Blocks required for the COVID19 Workflow:
 
-   ```bash
-   cd BuildingBlocks/Resources/images
-   sudo singularity build PhysiCell-COVID19.sif PhysiCell-COVID19.singularity
-   sudo singularity build printResults.sif printResults.singularity
-   sudo singularity build MaBoSS_sensitivity.sif MaBoSS_sensitivity.singularity
-   sudo singularity build FromSpeciesToMaBoSSModel.sif FromSpeciesToMaBoSSModel.singularity
-   cd ../../..
-   ```
+  ```bash
+  drug-synergies-workflow/BuildingBlocks/./install_BBs.sh
+  ```
 
-   > :warning: **TIP**: The singularity containers **can to be downloaded** from the project [B2DROP](https://b2drop.bsc.es/index.php/f/444350).
+3. Get the required Building Block images from the project [B2DROP](https://b2drop.bsc.es/index.php/f/444350):
 
+  - Required images:
+      - PhysiCell-COVID19.singularity
+      - printResults.singularity
+      - MaBoSS_sensitivity.singularity
+      - FromSpeciesToMaBoSSModel.singularity
 
-3. Clone this repository
+  The path where these files are stored **MUST be exported in the `PERMEDCOE_IMAGES`** environment variable.
 
-   ```bash
-   git clone https://github.com/PerMedCoE/drug-synergies-workflow.git
-   ```
+  > :warning: **TIP**: These containers can be built manually as follows (be patient since some of them may take some time):
+  1. Clone the `BuildingBlocks` repository
+     ```bash
+     git clone https://github.com/PerMedCoE/BuildingBlocks.git
+     ```
+  2. Build the required Building Block images
+     ```bash
+     cd BuildingBlocks/Resources/images
+     sudo singularity build PhysiCell-COVID19.sif PhysiCell-COVID19.singularity
+     sudo singularity build printResults.sif printResults.singularity
+     sudo singularity build MaBoSS_sensitivity.sif MaBoSS_sensitivity.singularity
+     sudo singularity build FromSpeciesToMaBoSSModel.sif FromSpeciesToMaBoSSModel.singularity
+     cd ../../..
+     ```
 
-4. Install the `BuildingBlocks` package
+**If using PyCOMPSs in local PC** (make sure that PyCOMPSs in installed):
 
-   ```bash
-   cd BuildingBlocks && ./install.sh && cd ..
-   ```
-
-5. Go to `Workflow/PyCOMPSs` folder
+4. Go to `Workflow/PyCOMPSs` folder
 
    ```bash
    cd Workflows/PyCOMPSs
    ```
 
-6. Execute `./run.sh`
-
-The execution is prepared to use the singularity images that **MUST** be placed into `BuildingBlocks/Resources/images` folder. If they are located in any other folder, please update the `run.sh` script setting the `PERMEDCOE_IMAGES` to the images folder.
-
-> **TIP**: If you want to run the workflow with a different dataset, please update the `run.sh` script setting the `dataset` variable to the new dataset folder and their file names.
+5. Execute `./run.sh`
+  > **TIP**: If you want to run the workflow with a different dataset, please update the `run.sh` script setting the `dataset` variable to the new dataset folder and their file names.
 
 ### MareNostrum 4
 
@@ -132,8 +136,8 @@ All Building Blocks are already installed in MN4, and the Drug Synergies Workflo
 1. Load the `COMPSs`, `Singularity` and `permedcoe` modules
 
    ```bash
-   export COMPSS_PYTHON_VERSION=3.10.2
-   module load COMPSs/Trunk
+   export COMPSS_PYTHON_VERSION=3
+   module load COMPSs/3.1
    module load singularity/3.5.2
    module use /apps/modules/modulefiles/tools/COMPSs/libraries
    module load permedcoe
@@ -159,11 +163,11 @@ All Building Blocks are already installed in MN4, and the Drug Synergies Workflo
 
 4. Execute `./launch.sh`
 
-This command will launch a job into the job queuing system (SLURM) requesting 2 nodes (one node acting half master and half worker, and other full worker node) for 20 minutes, and is prepared to use the singularity images that are already deployed in MN4 (located into the `PERMEDCOE_IMAGES` environment variable). It uses the dataset located into `../../Resources/data` folder.
+  This command will launch a job into the job queuing system (SLURM) requesting 2 nodes (one node acting half master and half worker, and other full worker node) for 20 minutes, and is prepared to use the singularity images that are already deployed in MN4 (located into the `PERMEDCOE_IMAGES` environment variable). It uses the dataset located into `../../Resources/data` folder.
 
-> :warning: **TIP**: If you want to run the workflow with a different dataset, please edit the `launch.sh` script and define the appropriate dataset path.
+  > :warning: **TIP**: If you want to run the workflow with a different dataset, please edit the `launch.sh` script and define the appropriate dataset path.
 
-After the execution, a `results` folder will be available with with Drug Synergies Workflow results.
+  After the execution, a `results` folder will be available with with Drug Synergies Workflow results.
 
 ## License
 
@@ -172,3 +176,7 @@ After the execution, a `results` folder will be available with with Drug Synergi
 ## Contact
 
 <https://permedcoe.eu/contact/>
+
+This software has been developed for the [PerMedCoE project](https://permedcoe.eu/), funded by the European Commission (EU H2020 [951773](https://cordis.europa.eu/project/id/951773)).
+
+![](https://permedcoe.eu/wp-content/uploads/2020/11/logo_1.png "PerMedCoE")

@@ -19,8 +19,8 @@ PRINT_DRUG_RESULTS_ASSETS=$(python3 -c "import print_drug_results_BB; import os;
 mkdir -p ${rep_results}
 
 print_drug_results_BB -d \
-    -i ${mut_results} \
-    -o ${rep_results} \
-    --mount_point ${PRINT_DRUG_RESULTS_ASSETS}/assets:${PRINT_DRUG_RESULTS_ASSETS}/assets
+    --mount_point ${PRINT_DRUG_RESULTS_ASSETS}/assets:${PRINT_DRUG_RESULTS_ASSETS}/assets \
+    --results_folder ${mut_results} \
+    --reports_folder ${rep_results}
 
 enable_pycompss
