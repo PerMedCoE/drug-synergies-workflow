@@ -18,9 +18,13 @@ PRINT_DRUG_RESULTS_ASSETS=$(python3 -c "import print_drug_results_BB; import os;
 # 1st patient
 mkdir -p ${rep_results}
 
+WORKING_DIRECTORY=$(pwd)/print_drug_results_wd
+mkdir -p ${WORKING_DIRECTORY}
+
 print_drug_results_BB -d \
-    --mount_point ${PRINT_DRUG_RESULTS_ASSETS}/assets:${PRINT_DRUG_RESULTS_ASSETS}/assets \
+    --mount_point ${PRINT_DRUG_RESULTS_ASSETS}/assets:${PRINT_DRUG_RESULTS_ASSETS}/assets,${WORKING_DIRECTORY}:${WORKING_DIRECTORY} \
     --results_folder ${mut_results} \
-    --reports_folder ${rep_results}
+    --reports_folder ${rep_results} \
+    --working_directory ${WORKING_DIRECTORY}
 
 enable_pycompss
