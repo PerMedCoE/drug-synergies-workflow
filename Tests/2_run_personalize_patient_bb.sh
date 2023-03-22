@@ -23,11 +23,13 @@ PERSONALIZE_PATIENT_ASSETS=$(python3 -c "import personalize_patient_BB; import o
 cell_line=SIDM00003
 mkdir -p ${per_results}/${cell_line}/
 
-WORKING_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
-mkdir -p ${WORKING_DIRECTORY}
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
 
-personalize_patient_BB -d \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets,${WORKING_DIRECTORY}:${WORKING_DIRECTORY} \
+personalize_patient_BB \
+    --debug \
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \
@@ -35,19 +37,20 @@ personalize_patient_BB -d \
     --cell_type ${cell_line} \
     --model_bnd ${mod_results}/model.bnd \
     --model_cfg ${mod_results}/model.cfg \
-    --model_output_dir ${per_results}/${cell_line}/ \
-    --working_directory ${WORKING_DIRECTORY}
+    --model_output_dir ${per_results}/${cell_line}/
 
 # 2nd cell line
 
 cell_line=SIDM00023
 mkdir -p ${per_results}/${cell_line}/
 
-WORKING_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
-mkdir -p ${WORKING_DIRECTORY}
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
 
-personalize_patient_BB -d \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets,${WORKING_DIRECTORY}:${WORKING_DIRECTORY} \
+personalize_patient_BB \
+    --debug \
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \
@@ -55,19 +58,20 @@ personalize_patient_BB -d \
     --cell_type ${cell_line} \
     --model_bnd ${mod_results}/model.bnd \
     --model_cfg ${mod_results}/model.cfg \
-    --model_output_dir ${per_results}/${cell_line}/ \
-    --working_directory ${WORKING_DIRECTORY}
+    --model_output_dir ${per_results}/${cell_line}/
 
 # 3rd cell line
 
 cell_line=SIDM00040
 mkdir -p ${per_results}/${cell_line}/
 
-WORKING_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
-mkdir -p ${WORKING_DIRECTORY}
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
 
-personalize_patient_BB -d \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets,${WORKING_DIRECTORY}:${WORKING_DIRECTORY} \
+personalize_patient_BB \
+    --debug \
+    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \
@@ -75,7 +79,6 @@ personalize_patient_BB -d \
     --cell_type ${cell_line} \
     --model_bnd ${mod_results}/model.bnd \
     --model_cfg ${mod_results}/model.cfg \
-    --model_output_dir ${per_results}/${cell_line}/ \
-    --working_directory ${WORKING_DIRECTORY}
+    --model_output_dir ${per_results}/${cell_line}/
 
 enable_pycompss

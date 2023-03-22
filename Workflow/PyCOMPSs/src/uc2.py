@@ -5,6 +5,8 @@ import csv
 
 # To set building block debug mode
 from permedcoe import set_debug
+# To set the default PyCOMPSs TMPDIR
+from permedcoe import TMPDIR
 # Import building block tasks
 from build_model_from_species_BB import build_model_from_species
 from personalize_patient_BB import personalize_patient_cellline
@@ -19,8 +21,6 @@ from helpers import get_genefiles
 from pycompss.api.api import compss_wait_on_directory
 from pycompss.api.api import compss_wait_on_file
 from pycompss.api.api import compss_barrier
-
-SANDBOX = "pycompss_sandbox"
 
 
 def get_cell_lines(rnaseq_data, limit=0):
@@ -68,7 +68,7 @@ def main():
     model_cfg_path = os.path.join(build_model_folder, "model.cfg")
 
     build_model_from_species(
-        working_directory=SANDBOX,
+        tmpdir=TMPDIR,
         output_bnd_file=model_bnd_path,
         output_cfg_file=model_cfg_path,
         input_file=args.list_genes
@@ -88,7 +88,7 @@ def main():
         personalize_patient_folder_cell = os.path.join(personalize_patient_folder, cell_line)
         os.makedirs(personalize_patient_folder_cell, exist_ok=True)
         personalize_patient_cellline(
-            working_directory=SANDBOX,
+            tmpdir=TMPDIR,
             expression_data=args.rnaseq_data,
             cnv_data=args.cn_data,
             mutation_data=args.mutation_data,
@@ -103,7 +103,7 @@ def main():
         os.makedirs(mutant_results_folder_cell, exist_ok=True)
         mutant_results_file = os.path.join(mutant_results_folder_cell, "sensitivity.json")
         MaBoSS_sensitivity_analysis(
-            working_directory=SANDBOX,
+            tmpdir=TMPDIR,
             model_folder=personalize_patient_folder_cell,
             genes_druggable=args.genes_drugs,
             genes_target=args.state_objective,
