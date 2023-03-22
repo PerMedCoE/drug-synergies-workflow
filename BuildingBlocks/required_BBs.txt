@@ -1,0 +1,6 @@
+# This file defines the required building blocks for this workflow
+#  - Lines that start with # will be ignored
+build_model_from_species
+personalize_patient
+MaBoSS
+print_drug_results
