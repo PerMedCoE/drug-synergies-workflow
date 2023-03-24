@@ -14,8 +14,13 @@ disable_pycompss
 
 BUILD_MODEL_FROM_SPECIES_ASSETS=$(python3 -c "import build_model_from_species_BB; import os; print(os.path.dirname(build_model_from_species_BB.__file__))")
 
-build_model_from_species_BB -d \
+TEMP_DIRECTORY=$(pwd)/build_model_from_species_sif_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+build_model_from_species_BB \
+    --debug \
     --mount_point ${BUILD_MODEL_FROM_SPECIES_ASSETS}/assets:${BUILD_MODEL_FROM_SPECIES_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     --build_model_from sif \
     --input_file ${data}/prova.sif \
     --output_bnd_file ${results}/build_model/model.bnd \

@@ -17,7 +17,12 @@ if [ -d "$results" ]; then
 fi
 mkdir -p $results
 
+# Prepare environment file:
+env_script="$(pwd)/worker_env.sh"
+echo "export PERMEDCOE_IMAGES=${PERMEDCOE_IMAGES}" > ${env_script}
+
 runcompss -gd \
+    --env_script=${env_script} \
     --python_interpreter=python3 \
     ${SCRIPT_DIR}/src/uc2.py \
     ${data}/Sub_genes.csv \
@@ -27,3 +32,5 @@ runcompss -gd \
     ${data}/genes_druggable.csv \
     ${data}/genes_target.csv \
     ${results}
+
+rm ${env_script}

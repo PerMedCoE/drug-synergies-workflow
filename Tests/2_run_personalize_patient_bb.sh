@@ -23,8 +23,13 @@ PERSONALIZE_PATIENT_ASSETS=$(python3 -c "import personalize_patient_BB; import o
 cell_line=SIDM00003
 mkdir -p ${per_results}/${cell_line}/
 
-personalize_patient_BB -d \
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+personalize_patient_BB \
+    --debug \
     --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \
@@ -39,8 +44,13 @@ personalize_patient_BB -d \
 cell_line=SIDM00023
 mkdir -p ${per_results}/${cell_line}/
 
-personalize_patient_BB -d \
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+personalize_patient_BB \
+    --debug \
     --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \
@@ -55,8 +65,13 @@ personalize_patient_BB -d \
 cell_line=SIDM00040
 mkdir -p ${per_results}/${cell_line}/
 
-personalize_patient_BB -d \
+TEMP_DIRECTORY=$(pwd)/personalize_patient_${cell_line}_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+personalize_patient_BB \
+    --debug \
     --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
     --cnv ${data}/mutations_20191101.csv \

@@ -18,8 +18,13 @@ PRINT_DRUG_RESULTS_ASSETS=$(python3 -c "import print_drug_results_BB; import os;
 # 1st patient
 mkdir -p ${rep_results}
 
-print_drug_results_BB -d \
+TEMP_DIRECTORY=$(pwd)/print_drug_results_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+print_drug_results_BB \
+    --debug \
     --mount_point ${PRINT_DRUG_RESULTS_ASSETS}/assets:${PRINT_DRUG_RESULTS_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     --results_folder ${mut_results} \
     --reports_folder ${rep_results}
 

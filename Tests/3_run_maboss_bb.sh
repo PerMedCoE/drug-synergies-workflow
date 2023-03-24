@@ -19,8 +19,13 @@ MABOSS_ASSETS=$(python3 -c "import MaBoSS_BB; import os; print(os.path.dirname(M
 
 mkdir -p ${mut_results}/SIDM00003
 
-MaBoSS_BB -d \
+TEMP_DIRECTORY=$(pwd)/MaBoSS_SIDM00003_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+MaBoSS_BB \
+    --debug \
     --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00003/ \
     --genes_druggable ${data}/genes_druggable.csv \
@@ -30,22 +35,34 @@ MaBoSS_BB -d \
 
 mkdir -p ${mut_results}/SIDM00023
 
-MaBoSS_BB -d \
+TEMP_DIRECTORY=$(pwd)/MaBoSS_SIDM00023_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+MaBoSS_BB \
+    --debug \
     --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00023/ \
     --genes_druggable ${data}/genes_druggable.csv \
     --genes_target ${data}/genes_target.csv \
     --result_file ${mut_results}/SIDM00023/sensitivity.json
 
+
 mkdir -p ${mut_results}/SIDM00040
 
-MaBoSS_BB -d \
+TEMP_DIRECTORY=$(pwd)/MaBoSS_SIDM00040_wd
+mkdir -p ${TEMP_DIRECTORY}
+
+MaBoSS_BB \
+    --debug \
     --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
+    --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00040/ \
     --genes_druggable ${data}/genes_druggable.csv \
     --genes_target ${data}/genes_target.csv \
     --result_file ${mut_results}/SIDM00040/sensitivity.json
+
 
 enable_pycompss
