@@ -16,8 +16,6 @@ tar -zxvf ${data}/data_celllines.tar.gz --directory ${data}
 source ${SCRIPT_DIR}/aux.sh
 disable_pycompss
 
-PERSONALIZE_PATIENT_ASSETS=$(python3 -c "import personalize_patient_BB; import os; print(os.path.dirname(personalize_patient_BB.__file__))")
-
 # 1st cell line
 
 cell_line=SIDM00003
@@ -28,7 +26,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 personalize_patient_BB \
     --debug \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
@@ -49,7 +46,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 personalize_patient_BB \
     --debug \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
@@ -70,7 +66,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 personalize_patient_BB \
     --debug \
-    --mount_point ${PERSONALIZE_PATIENT_ASSETS}/assets:${PERSONALIZE_PATIENT_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     uc2 \
     --expression ${data}/rnaseq_fpkm_20191101.csv \
