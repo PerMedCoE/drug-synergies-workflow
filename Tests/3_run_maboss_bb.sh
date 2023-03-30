@@ -13,8 +13,6 @@ mut_results=${results}/mutant_results
 source ${SCRIPT_DIR}/aux.sh
 disable_pycompss
 
-MABOSS_ASSETS=$(python3 -c "import MaBoSS_BB; import os; print(os.path.dirname(MaBoSS_BB.__file__))")
-
 # 1st patient
 
 mkdir -p ${mut_results}/SIDM00003
@@ -24,7 +22,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 MaBoSS_BB \
     --debug \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00003/ \
@@ -40,7 +37,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 MaBoSS_BB \
     --debug \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00023/ \
@@ -56,7 +52,6 @@ mkdir -p ${TEMP_DIRECTORY}
 
 MaBoSS_BB \
     --debug \
-    --mount_point ${MABOSS_ASSETS}/assets:${MABOSS_ASSETS}/assets \
     --tmpdir ${TEMP_DIRECTORY} \
     sensitivity \
     --model_folder ${per_results}/SIDM00040/ \
