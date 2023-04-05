@@ -1,17 +1,18 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
-export PERMEDCOE_IMAGES=${SCRIPT_DIR}/../../BuildingBlocks/Resources/images/
+if [[ -z "${PERMEDCOE_IMAGES}" ]]; then
+  default_images=$(realpath ${SCRIPT_DIR}/../../BuildingBlocks/Resources/images/)/
+  export PERMEDCOE_IMAGES=${default_images}
+  echo "WARNING: PERMEDCOE_IMAGES environment variable not set. Using default: ${default_images}"
+else
+  echo "INFO: Using PERMEDCOE_IMAGES from: ${PERMEDCOE_IMAGES}"
+fi
+export COMPUTING_UNITS=1
 
 data=${SCRIPT_DIR}/../Resources/data/
 results=${SCRIPT_DIR}/results/
-
 mkdir -p ${results}/build_model/
-
-source ${SCRIPT_DIR}/aux.sh
-disable_pycompss
-
 TEMP_DIRECTORY=$(pwd)/build_model_from_species_wd
 mkdir -p ${TEMP_DIRECTORY}
 
@@ -23,4 +24,3 @@ build_model_from_species_BB \
     --output_bnd_file ${results}/build_model/model.bnd \
     --output_cfg_file ${results}/build_model/model.cfg
 
-enable_pycompss
