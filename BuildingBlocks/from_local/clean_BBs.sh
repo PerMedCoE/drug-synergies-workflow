@@ -19,6 +19,10 @@ cd MaBoSS
 ./clean.sh
 cd ..
 
+cd MaBoSSG
+./clean.sh
+cd ..
+
 cd print_drug_results
 ./clean.sh
 cd ..
