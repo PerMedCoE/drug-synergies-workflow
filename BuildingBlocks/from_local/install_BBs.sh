@@ -19,6 +19,10 @@ cd MaBoSS
 ./install.sh
 cd ..
 
+cd MaBoSSG
+./install.sh
+cd ..
+
 cd print_drug_results
 ./install.sh
 cd ..
